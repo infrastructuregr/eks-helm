@@ -1,9 +1,9 @@
 FROM infrastructuregr/terraform-kubectl
 
-ENV AWSCLI_VER 1.16.248
-ENV HELM_VERSION v2.14.3
-ENV HELMFILE_VERSION v0.90.9
-
+ENV AWSCLI_VER 1.17.9
+ENV HELM_VERSION v3.0.3
+ENV HELMFILE_VERSION v0.99.0
+ENV KUBECTL_VER v1.17.2
 LABEL version="${HELMFILE_VERSION}-${HELM_VERSION}-${KUBECTL_VERSION}"
 
 
@@ -21,7 +21,7 @@ ADD https://github.com/roboll/helmfile/releases/download/${HELMFILE_VERSION}/hel
 RUN chmod +x /usr/bin/helmfile
 
 
-RUN helm init --skip-refresh --client-only \
+RUN helm init \
     && helm plugin install https://github.com/databus23/helm-diff --version master \
     && helm plugin install https://github.com/futuresimple/helm-secrets --version master \
     && helm plugin install https://github.com/aslafy-z/helm-git --version master \
